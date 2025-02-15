@@ -8,3 +8,6 @@ POSTGRES_PORT = config('POSTGRES_PORT', cast=int)
 
 SLACK_BOT_TOKEN = config('SLACK_BOT_TOKEN', cast=str)
 SLACK_SIGNING_SECRET = config('SLACK_SIGNING_SECRET', cast=str)
+
+SECRET_KEY = config('SECRET_KEY', cast=str)
+DEBUG = config('DEBUG', cast=bool)
