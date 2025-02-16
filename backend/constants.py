@@ -11,3 +11,6 @@ SLACK_SIGNING_SECRET = config('SLACK_SIGNING_SECRET', cast=str)
 
 SECRET_KEY = config('SECRET_KEY', cast=str)
 DEBUG = config('DEBUG', cast=bool)
+
+OPEN_ROUTER_API_KEY = config('OPEN_ROUTER_API_KEY', cast=str)
+BASE_URL = 'https://openrouter.ai/api/v1/chat/completions'
