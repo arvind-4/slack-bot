@@ -16,11 +16,10 @@ Including another URLconf
 """
 from django.urls import path
 from django.contrib import admin
-# from bot.views import slack_events, hello
-from bot.views import hello
+from bot.views import slack_events, hello
 
 urlpatterns = [
     path('', hello, name='hello'),
     path('admin/', admin.site.urls),
-    # path('slack/events', slack_events, name='slack_events'),
+    path('slack/events', slack_events, name='slack_events'),
 ]
