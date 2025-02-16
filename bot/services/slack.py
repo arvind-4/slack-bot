@@ -6,7 +6,6 @@ from backend.constants import (SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET,)
 app = App(
     token = SLACK_BOT_TOKEN,
     signing_secret = SLACK_SIGNING_SECRET,
-    
 )
 
 handler = SlackRequestHandler(app)
