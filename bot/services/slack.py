@@ -12,9 +12,14 @@ handler = SlackRequestHandler(app)
 
 @app.event("app_mention")
 def handle_mention(event, say):
+    print("Event:", event)
+    print("Say:", say)
     channel_id = event["channel"]
     user_id = event["user"]
     message = event["text"]
+    print("Channel ID:", channel_id)
+    print("User ID:", user_id)
+    print("Message:", message)
     
     # previous_conversations = Conversation.objects.filter(
     #     channel_id=channel_id
