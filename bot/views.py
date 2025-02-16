@@ -11,7 +11,7 @@ def hello(request: HttpRequest) -> HttpResponse:
 @csrf_exempt
 async def slack_events_handler(request):
     try:
-        return handler.handle(request)
+        return await handler.handle(request)
     except Exception as e:
         # logger.error(f"Error handling Slack event: {str(e)}")
         print(e)
