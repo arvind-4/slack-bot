@@ -1,16 +1,14 @@
 import json
-from bot.services.slack import handler
+from bot.services.slack import app
 from django.views.decorators.csrf import csrf_exempt
+from slack_bolt.adapter.django import SlackRequestHandler
 from django.http import (HttpResponse, HttpRequest, JsonResponse,)
+
+handler = SlackRequestHandler(app=app)
 
 def hello(request: HttpRequest) -> HttpResponse:
     return JsonResponse({"ping": "pong"})
 
 @csrf_exempt
-def slack_events(request: HttpRequest) -> HttpResponse:
-    return HttpResponse(handler.handle(request))
-    # body = json.loads(request.body)
-    # challenge = body.get('challenge')
-    # if challenge:
-    #     return JsonResponse({'challenge': challenge})
-    # return JsonResponse({'challenge': None})
+def slack_events_handler(request: HttpRequest):
+    return handler.handle(request)
