@@ -1,6 +1,6 @@
 import logging
 from slack_bolt import App
-from bot.models import Conversation
+from django.apps import apps
 from bot.services.ai import get_ai_response
 from backend.constants import SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET
 
@@ -14,23 +14,27 @@ app = App(
 
 @app.event("app_mention")
 def handle_app_mentions(logger, event, say):
+    Conversation = apps.get_model("bot", "Conversation")
     logger.info(event)
     channel_id = event["channel"]
     user_id = event["user"]
     message = event["text"]
     logger.info(f"Received app mention from {user_id} in {channel_id}: {message}")
-    previous_conversations = Conversation.objects.filter(
-        channel_id=channel_id
-    ).order_by('-timestamp')[:5]
-    logger.info(f"Previous conversations: {previous_conversations}")
-    logger.info("Generating AI response...")
-    response = get_ai_response(previous_conversations)
-    logger.info(f"AI response: {response}")
-    Conversation.objects.create(
-        channel_id=channel_id,
-        user_id=user_id,
-        message=message,
-        response=response
-    )
+    logger.info("Creating conversation...")
+    qs = Conversation.objects.all()
+    logger.info(f"Conversations: {qs}")
+    # previous_conversations = Conversation.objects.filter(
+    #     channel_id=channel_id
+    # ).order_by('-timestamp')[:5]
+    # logger.info(f"Previous conversations: {previous_conversations}")
+    # logger.info("Generating AI response...")
+    # response = get_ai_response(previous_conversations)
+    # logger.info(f"AI response: {response}")
+    # Conversation.objects.create(
+    #     channel_id=channel_id,
+    #     user_id=user_id,
+    #     message=message,
+    #     response=response
+    # )
     logger.info("Sending response to user...")
-    say(text=response, thread_ts=event["ts"])
+    say(text="Hello, I am a bot. How can I help you?", thread_ts=event["ts"])
