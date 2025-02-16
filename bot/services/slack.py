@@ -14,15 +14,15 @@ app = App(
 
 @app.event("app_mention")
 def handle_app_mentions(logger, event, say):
-    Conversation = apps.get_model("bot", "Conversation")
+    # Conversation = apps.get_model("bot", "Conversation")
     logger.info(event)
     channel_id = event["channel"]
     user_id = event["user"]
     message = event["text"]
     logger.info(f"Received app mention from {user_id} in {channel_id}: {message}")
-    logger.info("Creating conversation...")
-    qs = Conversation.objects.all()
-    logger.info(f"Conversations: {qs}")
+    # logger.info("Creating conversation...")
+    # qs = Conversation.objects.all()
+    # logger.info(f"Conversations: {qs}")
     # previous_conversations = Conversation.objects.filter(
     #     channel_id=channel_id
     # ).order_by('-timestamp')[:5]
