@@ -8,9 +8,9 @@ def hello(request: HttpRequest) -> HttpResponse:
 
 @csrf_exempt
 def slack_events(request: HttpRequest) -> HttpResponse:
-    # return HttpResponse(handler.handle(request))
-    body = json.loads(request.body)
-    challenge = body.get('challenge')
-    if challenge:
-        return JsonResponse({'challenge': challenge})
-    return JsonResponse({'challenge': None})
+    return HttpResponse(handler.handle(request))
+    # body = json.loads(request.body)
+    # challenge = body.get('challenge')
+    # if challenge:
+    #     return JsonResponse({'challenge': challenge})
+    # return JsonResponse({'challenge': None})
